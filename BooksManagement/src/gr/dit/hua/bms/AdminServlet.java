@@ -7,17 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class HomeServlet
- */
-@WebServlet("/HomeServlet")
-public class HomeServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Servlet implementation class AdminServlet
+ */
+@WebServlet("/AdminServlet")
+@RequestMapping("/AdminServlet")
+public class AdminServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public HomeServlet() {
+    public AdminServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -32,11 +37,12 @@ public class HomeServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@RequestMapping(params="addUser",  method = RequestMethod.POST)
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("do something post!");
-		request.getParameter("publisher");
-		
-		
+		String Username=request.getParameter("newUsr");
+		String Password=request.getParameter("newPwd");
+		String Role=request.getParameter("role");
+		System.out.println(Username+" "+Password+" "+Role);
 	}
 
 }

@@ -22,14 +22,32 @@ public class DbServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// setup connection variables
-        String jdbcUrl = "www.db4free.net";
-        String user = "iaksroot";
-        String pass = "iakspwd1";
-        String driver= "com.mysql.jdbc.Driver";
+
+        Connection conn = null;
+        
+        
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(" Unable to load driver. ");
+        }
+        String url = "jdbc:mysql://www.db4free.net:3306/books_management";
+        String username = "iaksroot";
+        String password = "iakspwd1";
+        try {
+           	conn = DriverManager.getConnection(url, username, password);
+            System.out.println(" Connection Established. ");
+        } catch (SQLException e) {
+            System.out.println(" Error connecting to database:  "
+                    + e);
+        }
+        
+        
+        
         
         // get connection to db
-        try {
+      /* try {
                 PrintWriter out = response.getWriter();
                 out.println("Connecting to db: " + jdbcUrl);
                 Class.forName(driver);
@@ -40,7 +58,7 @@ public class DbServlet extends HttpServlet {
         catch (Exception e) {
                 e.printStackTrace();
                 throw new ServletException(e);
-        }
+       } */
 	}
-
 }
+
