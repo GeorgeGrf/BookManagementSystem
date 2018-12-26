@@ -6,15 +6,6 @@
 
 
 
-form,section {
-	background-color: gray;
-}
-
-table,th, td{
-	width:50%;
-	background-color:white;
- 	border-style:solid;
-}
 
 
 
@@ -23,6 +14,7 @@ table,th, td{
 </head>
 <body>
 Welcome admin <br>
+<div id=addDiv style:display="none">
 <form action="AdminServlet" method="post" id=newForm>
 Add new user <br>
 Username: <input type="text" name="newUsr"> <br>
@@ -34,8 +26,12 @@ Role:
 	<input type="radio" name="role" value="secretary"> Secretary <br>
 	<br> <button type="submit" name="addUser">Add</button>
 </form> <br>
+</div>
 
-<section>
+
+
+
+<div id=searchDiv style:display="none">
 Search/Modify User <br>
 <form action="AdminServlet" method="get" id="nameSearch"> 
 Search User By: <br>
@@ -55,7 +51,7 @@ Users: <br>
   <tr>
   </tr>
 </table>
-</section>
+</div>
 
 
 </body>
