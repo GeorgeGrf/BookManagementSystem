@@ -1,29 +1,61 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Insert title here</title>
+
+<style>
+
+
+
+form,section {
+	background-color: gray;
+}
+
+table,th, td{
+	width:50%;
+	background-color:white;
+ 	border-style:solid;
+}
+
+
+
+</style>
+
 </head>
 <body>
-<p>Welcome admin</p> <br>
-<form action="AdminServlet" method="post">
-<p> Add new user </p>
-<p>Username:</p> <input type="text" name="newUsr">
-<p>Password:</p> <input type="text" name="newPwd">
-<p>Role:</p> 
-	<input type="radio" name="role" value="admin"> Admin<br>
-	<input type="radio" name="role" value="publisher"> Publisher<br>
-	<input type="radio" name="role" value="proffesor"> Proffesor<br>
+Welcome admin <br>
+<form action="AdminServlet" method="post" id=newForm>
+Add new user <br>
+Username: <input type="text" name="newUsr"> <br>
+Password: <input type="text" name="newPwd"> <br>
+Role: 
+	<input type="radio" name="role" value="admin"> Admin 
+	<input type="radio" name="role" value="publisher"> Publisher 
+	<input type="radio" name="role" value="proffesor"> Proffesor 
 	<input type="radio" name="role" value="secretary"> Secretary <br>
-	<button type="submit" name="addUser">Add</button>
+	<br> <button type="submit" name="addUser">Add</button>
 </form> <br>
 
+<section>
+Search/Modify User <br>
+<form action="AdminServlet" method="get" id="nameSearch"> 
+Search User By: <br>
+Username: <input type="text" name="srcName"> <button type="submit" >Search</button>
+</form>
+<form action="AdminServlet" method="get" id="roleSearch">
+Role: <input type="text" name="srcRole"> <button name="submit">Search</button>
+</form>
 
-
-
-
+Users: <br>
+<table id="srcResults">
+  <tr>
+  	<th>Id</th>
+    <th>UserName</th>
+    <th>Role</th>
+  </tr>
+  <tr>
+  </tr>
+</table>
+</section>
 
 
 </body>
