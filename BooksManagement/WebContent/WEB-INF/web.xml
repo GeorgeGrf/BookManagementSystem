@@ -12,4 +12,16 @@
 			<include-coda>/WEB-INF/fragments/footer.jspf</include-coda>
 		</jsp-property-group>
 	</jsp-config>
-</web-app>
+	
+	
+	<servlet>
+    <servlet-name>DbServlet</servlet-name>
+    <servlet-class>gr.dit.hua.bms.DbServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DbServlet</servlet-name>
+    <url-pattern>/hi</url-pattern>
+  </servlet-mapping>
+</web-app>    
+	
