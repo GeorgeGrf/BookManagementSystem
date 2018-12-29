@@ -1,4 +1,4 @@
-<p>WELCOME ΤΟ ΤΕΑΜ 49!
+<p>Team 49's Book Management System!
 <br>
 <form action="HomeServlet" method="post">
 Please choose your role here
