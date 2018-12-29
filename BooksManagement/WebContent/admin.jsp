@@ -147,25 +147,7 @@ Users: <br>
   	<td>me</td>
   	<td>admin</td>
   </tr>
-  
-  <tr>
-  	<td><input type="radio" name="userSel"/></td>
-  	<td>2</td>
-  	<td>some</td>
-  	<td>secretary</td>
-  </tr>
-  <tr>
-  	<td><input type="radio" name="userSel"/></td>
-  	<td>3</td>
-  	<td>some</td>
-  	<td>publisher</td>
-  </tr>
-  <tr>
-  	<td><input type="radio" name="userSel"/></td>
-  	<td>4</td>
-  	<td>some</td>
-  	<td>professor</td>
-  </tr>
+
 </table>
 <button onClick="EditUser()">Edit Selected User</button>
 

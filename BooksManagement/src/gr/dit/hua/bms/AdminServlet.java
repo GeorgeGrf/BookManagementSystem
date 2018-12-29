@@ -39,9 +39,19 @@ public class AdminServlet extends HttpServlet {
     	String srcName=request.getParameter("srcName");
 		List list=(new User()).nameSearch(srcName);
 		System.out.println();
-		
-	
+
 	}
+    
+    
+    @RequestMapping(params="roleSearch",  method = RequestMethod.GET)
+   	protected void roleGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       	String srcRole=request.getParameter("srcRole");
+   		List list=(new User()).roleSearch(srcRole);
+   		System.out.println();
+
+   	}
+    
+    
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

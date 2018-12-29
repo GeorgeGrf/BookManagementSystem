@@ -151,38 +151,41 @@ public class User implements java.io.Serializable {
 	public List nameSearch(String name) {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 				.buildSessionFactory();
-
 		// create session
 		Session session = factory.getCurrentSession();
-		
-
-		List list;
-		      
-		        try {
-					
+		List list;      
+		        try {			
 					// start a transaction
 					session.beginTransaction();
-
 					// save the student object
-			        Query query = session.createQuery("select id, username, role from User where username like '%:name%' ");
-					
-			        query.setParameter("name", name);
-			
-
-			
+			        Query query = session.createQuery("select id, username, role from User where username like '%"+name+"%' ");		
 			        list = query.list();
-
-
 				} finally {
 					factory.close();
-					
+				
 				}
 				return list;
-
 			}
 		 
 		
-		       
+	public List roleSearch(String role) {
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
+				.buildSessionFactory();
+		// create session
+		Session session = factory.getCurrentSession();
+		List list;      
+		        try {			
+					// start a transaction
+					session.beginTransaction();
+					// save the student object
+			        Query query = session.createQuery("select id, username, role from User where role='"+role+"' ");		
+			        list = query.list();
+				} finally {
+					factory.close();
+				
+				}
+				return list;
+			}    
 
 		
 	}
