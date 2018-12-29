@@ -1,6 +1,9 @@
 package gr.dit.hua.bms;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import gr.dit.hua.entities.User;
 
 /**
  * Servlet implementation class AdminServlet
@@ -29,20 +34,32 @@ public class AdminServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    @RequestMapping(params="nameSearch",  method = RequestMethod.GET)
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+    	String srcName=request.getParameter("srcName");
+		List list=(new User()).nameSearch(srcName);
+		System.out.println();
+		
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@RequestMapping(params="addUser",  method = RequestMethod.POST)
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void addPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String Username=request.getParameter("newUsr");
 		String Password=request.getParameter("newPwd");
 		String Role=request.getParameter("role");
-		System.out.println(Username+" "+Password+" "+Role);
+		User user=new User(Username,Password,Role);
+		PrintWriter out = response.getWriter();
+		if(user.addUser()==0) {
+			out.println("User added to database.");
+		} else {
+			out.println("Error,user not added to database.");
+		}
+		
+		
 	}
 
 }
