@@ -12,7 +12,6 @@
 			<include-coda>/WEB-INF/fragments/footer.jspf</include-coda>
 		</jsp-property-group>
 	</jsp-config>
-
 	<!-- Spring MVC Configs -->
 
 	<!-- Step 1: Configure Spring MVC Dispatcher Servlet -->
@@ -31,4 +30,18 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+
+<!-- yakinthos IS HERE.......................................................... -->
+	<servlet>
+		<servlet-name>DbServlet</servlet-name>
+		<servlet-class>gr.dit.hua.bms.DbServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DbServlet</servlet-name>
+		<url-pattern>/hi</url-pattern>
+	</servlet-mapping>
+
 </web-app>
+
