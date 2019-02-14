@@ -17,6 +17,7 @@ public class Book implements java.io.Serializable {
 
 	private BookId id;
 	private Integer quantity;
+	private String title;
 	private Integer courseId;
 	private Boolean isAvailable;
 	private String city;

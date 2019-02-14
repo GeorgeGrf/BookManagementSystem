@@ -118,18 +118,17 @@ public class User implements java.io.Serializable {
 		}
 
 	}
-	
-	
+
 	public int addUser() {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 				.buildSessionFactory();
 
 		// create session
 		Session session = factory.getCurrentSession();
-			User user=this;
-			int success=1;
+		User user = this;
+		int success = 1;
 		try {
-			
+
 			// start a transaction
 			session.beginTransaction();
 
@@ -138,60 +137,53 @@ public class User implements java.io.Serializable {
 
 			// commit transaction
 			session.getTransaction().commit();
-			success=0;
+			success = 0;
 
 		} finally {
 			factory.close();
-			
+
 		}
 		return success;
 
 	}
-	
+
 	public List nameSearch(String name) {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 				.buildSessionFactory();
 		// create session
 		Session session = factory.getCurrentSession();
-		List list;      
-		        try {			
-					// start a transaction
-					session.beginTransaction();
-					// save the student object
-			        Query query = session.createQuery("select id, username, role from User where username like '%"+name+"%' ");		
-			        list = query.list();
-				} finally {
-					factory.close();
-				
-				}
-				return list;
-			}
-		 
-		
+		List list;
+		try {
+			// start a transaction
+			session.beginTransaction();
+			// save the student object
+			Query query = session
+					.createQuery("select id, username, role from User where username like '%" + name + "%' ");
+			list = query.list();
+		} finally {
+			factory.close();
+
+		}
+		return list;
+	}
+
 	public List roleSearch(String role) {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 				.buildSessionFactory();
 		// create session
 		Session session = factory.getCurrentSession();
-		List list;      
-		        try {			
-					// start a transaction
-					session.beginTransaction();
-					// save the student object
-			        Query query = session.createQuery("select id, username, role from User where role='"+role+"' ");		
-			        list = query.list();
-				} finally {
-					factory.close();
-				
-				}
-				return list;
-			}    
+		List list;
+		try {
+			// start a transaction
+			session.beginTransaction();
+			// save the student object
+			Query query = session.createQuery("select id, username, role from User where role='" + role + "' ");
+			list = query.list();
+		} finally {
+			factory.close();
 
-		
+		}
+		return list;
 	}
-	
-	
-	
-	
-	
 
+}
