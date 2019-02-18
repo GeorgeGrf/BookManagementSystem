@@ -16,19 +16,7 @@ import gr.dit.hua.entities.User;
 
 @Controller
 public class MainController {
-
-	// these mappings are gonna be removed when admin and publisher are utilized, loginPage stays
-	@RequestMapping("/")
-	public String adminPage() {
-		return "admin";
-	}
-
-	@RequestMapping("/")
-	public String publisherPage() {
-		return "publisher";
-	}
-
-	// ^ removed soon
+	
 	
 	@RequestMapping("/")
 	public String loginPage() {
@@ -50,8 +38,8 @@ public class MainController {
 			session.beginTransaction();
 
 			// get the student object
-			User dbuser = session.get(User.class, name);
-			if (dbuser.getPassword() == pwd && dbuser != null) {
+			User dbuser = session.get(User.class, new Integer(name));
+			if (dbuser.getPassword().toString() == pwd) {
 				String role = dbuser.getRole();
 				return role;
 			} else if (dbuser == null) {

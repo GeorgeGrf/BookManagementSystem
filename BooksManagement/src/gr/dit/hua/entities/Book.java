@@ -31,10 +31,11 @@ public class Book implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Book(BookId id, Integer quantity, Integer courseId, Boolean isAvailable, String city, String street,
+	public Book(BookId id, Integer quantity, String title, Integer courseId, Boolean isAvailable, String city, String street,
 			Integer no) {
 		this.id = id;
 		this.quantity = quantity;
+		this.title = title;
 		this.courseId = courseId;
 		this.isAvailable = isAvailable;
 		this.city = city;
@@ -63,6 +64,15 @@ public class Book implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
+	@Column(name = "title")
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title= title;
+	}
+	
 	@Column(name = "courseId")
 	public Integer getCourseId() {
 		return this.courseId;
