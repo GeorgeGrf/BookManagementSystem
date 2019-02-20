@@ -28,7 +28,7 @@ public class User implements java.io.Serializable {
 	private String username;
 	private String password;
 	private String role;
-	private Integer courses;
+	private String courses;
 
 	public User() {
 	}
@@ -39,7 +39,7 @@ public class User implements java.io.Serializable {
 		this.role = role;
 	}
 
-	public User(String username, String password, String role, Integer courses) {
+	public User(String username, String password, String role, String courses) {
 		this.username = username;
 		this.password = password;
 		this.role = role;
@@ -86,11 +86,11 @@ public class User implements java.io.Serializable {
 	}
 
 	@Column(name = "courses")
-	public Integer getCourses() {
+	public String getCourses() {
 		return this.courses;
 	}
 
-	public void setCourses(Integer courses) {
+	public void setCourses(String courses) {
 		this.courses = courses;
 	}
 

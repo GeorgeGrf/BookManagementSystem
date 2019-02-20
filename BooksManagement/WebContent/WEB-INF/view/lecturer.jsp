@@ -1,6 +1,6 @@
 <jsp:useBean id="lecturer" class="gr.dit.hua.entities.User"></jsp:useBean>
 
-<p>WELCOME lecturer.getUsername()
+<p>WELCOME ${name}
 <br>
 Please choose from the list the subject you want to submit books for:
 <form action="pickSubject" method="post">

@@ -17,15 +17,17 @@ public class Course implements java.io.Serializable {
 	private int professorId;
 	private int book1;
 	private int book2;
+	private String title;
 
 	public Course() {
 	}
 
-	public Course(int courseId, int professorId, int book1, int book2) {
+	public Course(int courseId, int professorId, int book1, int book2, String title) {
 		this.courseId = courseId;
 		this.professorId = professorId;
 		this.book1 = book1;
 		this.book2 = book2;
+		this.title = title;
 	}
 
 	@Id
@@ -66,4 +68,12 @@ public class Course implements java.io.Serializable {
 		this.book2 = book2;
 	}
 
+	@Column(name = "title", nullable = false)
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 }

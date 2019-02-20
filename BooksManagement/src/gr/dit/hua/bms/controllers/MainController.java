@@ -1,5 +1,9 @@
 package gr.dit.hua.bms.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -38,9 +42,25 @@ public class MainController {
 			session.beginTransaction();
 
 			// get the student object
-			User dbuser = session.get(User.class, new Integer(name));
-			if (dbuser.getPassword().toString() == pwd) {
+			List results = session
+		            .createQuery("select us from User us where us.username = :username")
+		            .setParameter("username", name)
+		            .list();
+			User dbuser = (User) results.get(0);
+			
+			if (dbuser.getPassword().equals(pwd))  {
 				String role = dbuser.getRole();
+				String username = dbuser.getUsername();
+				model.addAttribute("name", username);
+				
+				List<String> courses = new ArrayList<>();
+				String str = dbuser.getCourses();
+				StringTokenizer tokenizer = new StringTokenizer(str, " ");
+				while (tokenizer.hasMoreElements()) {
+			        String course = session.get(Course.class, new Integer(tokenizer.nextToken()) ).getTitle();
+			        courses.add(course);
+			    }
+				
 				return role;
 			} else if (dbuser == null) {
 				System.out.println("User was not found in the database");
