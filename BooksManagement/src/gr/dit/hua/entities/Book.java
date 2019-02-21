@@ -1,11 +1,15 @@
 package gr.dit.hua.entities;
 // Generated Dec 29, 2018 12:45:02 AM by Hibernate Tools 3.4.0.CR1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -15,25 +19,26 @@ import javax.persistence.Table;
 @Table(name = "Book", catalog = "books_management")
 public class Book implements java.io.Serializable {
 
-	private BookId id;
-	private Integer quantity;
-	private String title;
-	private Integer courseId;
+	private int publisherId;
+	private int bookId;
+	private int quantity;
+	private int courseId;
 	private Boolean isAvailable;
 	private String city;
 	private String street;
-	private Integer no;
-
+	private int no;
+	private String title;
+	
 	public Book() {
 	}
 
-	public Book(BookId id) {
-		this.id = id;
+	public Book(int bookId) {
+		this.bookId = bookId;
 	}
 
-	public Book(BookId id, Integer quantity, String title, Integer courseId, Boolean isAvailable, String city, String street,
-			Integer no) {
-		this.id = id;
+	public Book(int publisherId, int bookId, int quantity, int courseId, Boolean isAvailable, String city, String street, int no, String title) {
+		this.publisherId = publisherId;
+		this.bookId = bookId;
 		this.quantity = quantity;
 		this.title = title;
 		this.courseId = courseId;
@@ -43,24 +48,34 @@ public class Book implements java.io.Serializable {
 		this.no = no;
 	}
 
-	@EmbeddedId
-
-	@AttributeOverrides({ @AttributeOverride(name = "bookId", column = @Column(name = "bookId", nullable = false)),
-			@AttributeOverride(name = "publisherId", column = @Column(name = "publisherId", nullable = false)) })
-	public BookId getId() {
-		return this.id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	
+	@Column(name = "bookId", unique = true, nullable = false)
+	public int getId() {
+		return this.bookId;
 	}
 
-	public void setId(BookId id) {
-		this.id = id;
+	public void setId(int bookId) {
+		this.bookId = bookId;
+	}
+	
+	@Column(name = "publisherId", nullable = false)
+	public int getpublisherId() {
+		return this.publisherId;
 	}
 
+	public void setpublisherId(int pID) {
+		this.publisherId = pID;
+	}
+	
+	
 	@Column(name = "quantity")
-	public Integer getQuantity() {
+	public int getQuantity() {
 		return this.quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
@@ -74,11 +89,11 @@ public class Book implements java.io.Serializable {
 	}
 	
 	@Column(name = "courseId")
-	public Integer getCourseId() {
+	public int getCourseId() {
 		return this.courseId;
 	}
 
-	public void setCourseId(Integer courseId) {
+	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
 
@@ -110,11 +125,11 @@ public class Book implements java.io.Serializable {
 	}
 
 	@Column(name = "no")
-	public Integer getNo() {
+	public int getNo() {
 		return this.no;
 	}
 
-	public void setNo(Integer no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 

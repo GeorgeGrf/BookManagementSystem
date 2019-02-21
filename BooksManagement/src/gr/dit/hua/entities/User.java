@@ -24,7 +24,7 @@ import org.hibernate.query.Query;
 @Table(name = "User", catalog = "books_management")
 public class User implements java.io.Serializable {
 
-	private Integer id;
+	private int id;
 	private String username;
 	private String password;
 	private String role;
@@ -50,11 +50,11 @@ public class User implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

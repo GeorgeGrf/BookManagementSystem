@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import gr.dit.hua.entities.BookId;
+
 import gr.dit.hua.entities.Course;
 import gr.dit.hua.entities.User;
 
@@ -33,7 +33,7 @@ public class MainController {
 		String pwd = request.getParameter("password");
 		// speak with the db
 		// return the role of the user back to insert below to the return "...";
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class).addAnnotatedClass(Course.class)
 				.buildSessionFactory();
 		Session session = factory.getCurrentSession();
 		try {
@@ -41,14 +41,14 @@ public class MainController {
 			// start a transaction
 			session.beginTransaction();
 
-			// get the student object
+			// get the student object with the username that the user gave
 			List results = session
 		            .createQuery("select us from User us where us.username = :username")
 		            .setParameter("username", name)
 		            .list();
 			User dbuser = (User) results.get(0);
 			
-			if (dbuser.getPassword().equals(pwd))  {
+			if (dbuser.getPassword().equals(pwd) && dbuser != null)  {
 				String role = dbuser.getRole();
 				String username = dbuser.getUsername();
 				model.addAttribute("name", username);
@@ -60,6 +60,7 @@ public class MainController {
 			        String course = session.get(Course.class, new Integer(tokenizer.nextToken()) ).getTitle();
 			        courses.add(course);
 			    }
+				model.addAttribute("courses", courses);
 				
 				return role;
 			} else if (dbuser == null) {

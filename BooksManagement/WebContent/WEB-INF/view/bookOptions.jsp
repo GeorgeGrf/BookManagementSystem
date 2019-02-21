@@ -1,4 +1,5 @@
 <p>Here are your book options(please choose 2):
+<p>Your current ones are: ${book1} and ${book2}
 <br>
 <form action="pickBooks" method="post">
 <select id="bookchoice1" name="choice1">
