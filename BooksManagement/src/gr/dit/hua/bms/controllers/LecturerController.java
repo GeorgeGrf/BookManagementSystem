@@ -39,25 +39,25 @@ public class LecturerController {
 
 			Course dbcourse = (Course) results.get(0);
 			if (subject != null) {
-				/*
+				
 				int id1 = dbcourse.getBook1();
 				int id2 = dbcourse.getBook2();
 				List book1 = session
-			            .createQuery("select b from Book b where b.bookId = :b1")
+			            .createQuery("select b from Book b where bookId = :b1")
 			            .setParameter("b1", id1)
 			            .list();
-				Book dbbook1 = (Book) results.get(0);
+				Book dbbook1 = (Book) book1.get(0);
 				
 				List book2 = session
-			            .createQuery("select b from Book b where b.bookId = :b2")
+			            .createQuery("select b from Book b where bookId = :b2")
 			            .setParameter("b2", id2)
 			            .list();
-				Book dbbook2 = (Book) results.get(0);
+				Book dbbook2 = (Book) book2.get(0);
 
 				
 				model.addAttribute("book1", dbbook1.getTitle());
 				model.addAttribute("book2", dbbook2.getTitle());
-				*/
+				
 				session.getTransaction().commit();
 				return "bookOptions";
 			} else {
