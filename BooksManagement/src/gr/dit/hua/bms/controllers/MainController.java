@@ -73,6 +73,7 @@ public class MainController {
 			session.getTransaction().commit();
 
 		} finally {
+			session.close();
 			factory.close();
 		}
 		return " ";

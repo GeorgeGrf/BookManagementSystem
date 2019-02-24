@@ -3,10 +3,8 @@ package gr.dit.hua.entities;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -32,6 +30,19 @@ public class Book implements java.io.Serializable {
 	public Book() {
 	}
 
+	public Book(int publisherId, int bookId,String title, int quantity , String city, String street, int no) {
+		this.publisherId=publisherId;
+		this.bookId=bookId;
+		this.quantity=quantity;
+		this.city=city;
+		this.street=street;
+		this.no=no;
+		this.title=title;
+		if (quantity>0) {
+			this.isAvailable=true;
+		} else {this.isAvailable=false;}
+	}
+	
 	public Book(int bookId) {
 		this.bookId = bookId;
 	}

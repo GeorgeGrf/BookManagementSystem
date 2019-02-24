@@ -88,6 +88,7 @@ public class LecturerController {
 
 		} finally {
 			factory.close();
+			session.close();
 		}
 		
 	}
