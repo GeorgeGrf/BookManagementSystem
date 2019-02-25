@@ -10,5 +10,8 @@ Student Id: <input type="text" name="studentId"><br>
 Course Id: <input type="text" name="courseId"><br>
 <button type="submit">Search</button>
 </form>
+<form action="LogOut" method="post"> 
+<Button type="submit">Log Out</Button>
+</form>
 </body>
 </html>

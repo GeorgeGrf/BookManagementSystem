@@ -11,5 +11,8 @@ Please choose from the list the subject you want to submit books for:
 </select>
 <button type="submit" id="submit">Submit</button>
 </form>
+<form action="LogOut" method="post"> 
+<Button type="submit">Log Out</Button>
+</form>
 
 

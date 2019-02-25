@@ -22,10 +22,7 @@ import gr.dit.hua.entities.User;
 public class LecturerController {
 
 	String subject;
-	@RequestMapping("/LogOut")
-		public String pickSubject(HttpServletRequest request) {
-			return "/";
-		}
+
 	
 		
 		

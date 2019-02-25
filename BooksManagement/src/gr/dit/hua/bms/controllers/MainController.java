@@ -27,6 +27,13 @@ public class MainController {
 		return "loginPage";
 	}
 
+	
+	@RequestMapping("/LogOut")
+	public String pickSubject(HttpServletRequest request) {
+		return "loginPage";
+	}
+	
+	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) {
 		String name = request.getParameter("name");
