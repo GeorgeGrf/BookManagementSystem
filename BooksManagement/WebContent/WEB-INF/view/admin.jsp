@@ -17,24 +17,19 @@ function ShowFunction(number) {
 		case 1:
 			document.getElementById("menuDiv").style.display = "none";
 			document.getElementById("addDiv").style.display = "block";
-			document.getElementById("searchDiv").style.display = "none";
 			break;
 		case 2:
 			document.getElementById("menuDiv").style.display = "none";
 			document.getElementById("addDiv").style.display = "none";
-			document.getElementById("searchDiv").style.display = "block";
 			break;
 		case 3:
 			document.getElementById("menuDiv").style.display = "block";
 			document.getElementById("addDiv").style.display = "none";
-			document.getElementById("searchDiv").style.display = "none";
 			break;
 		case 4:
-			document.getElementById("searchDiv").style.display = "none";
 			document.getElementById("editDiv").style.display = "block";
 			break;
 		case 5:
-			document.getElementById("searchDiv").style.display = "block";
 			document.getElementById("editDiv").style.display = "none";
 	}
 }
@@ -96,8 +91,10 @@ function EditUser(){
 Welcome admin <br>
 
 <button onClick="ShowFunction(1)">Add User</button><br>
-<button onClick="ShowFunction(2)">Search User</button><br>
-<button>Logout</button>
+
+<form action="LogOut" method="post"> 
+<Button type="submit">Log Out</Button>
+</form>
 
 
 
@@ -177,7 +174,8 @@ Users: <br>
   	<td id="roleEdit"><input type="radio" name="roleE" id="admin"> Admin 
 	<input type="radio" name="roleE" id="publisher"> Publisher 
 	<input type="radio" name="roleE" id="professor"> Professor 
-	<input type="radio" name="roleE" id="secretary"> Secretary <br></td>
+	<input type="radio" name="roleE" id="secretary"> Secretary
+	<input type="radio" name="roleE" id="student"> Student <br></td>
   </tr>
  </table>
 </form>

@@ -9,7 +9,15 @@
 </form>
  
 <form name='f2' method='post' action='editBooks'>
-<button type='submit'>Edit Existing Books</button>
+<button type='submit'>Edit Existing Stock</button>
+</form>
+ 
+<form name='f3' method='post' action='delivery'>
+<button type='submit'>Confirm Delivery</button>
+</form>
+  
+<form action="LogOut" method="post"> 
+<Button type="submit">Log Out</Button>
 </form>
  
 

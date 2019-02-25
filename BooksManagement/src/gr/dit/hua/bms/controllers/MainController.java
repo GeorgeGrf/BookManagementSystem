@@ -33,7 +33,6 @@ public class MainController {
 		return "loginPage";
 	}
 	
-	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) {
 		String name = request.getParameter("name");

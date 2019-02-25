@@ -14,7 +14,7 @@ Street:<input type="text" name="BookStreet"><br>
 Number:<input type="text"name=BookNumber><br>
 <button type="submit">Submit</button><button type="reset">Reset</button><br>
 </form>
-<form action='publisher' method='post'>
+<form action='pBack' method='post'>
 <button type="submit">Cancel</button>
 </form>
 

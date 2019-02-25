@@ -14,8 +14,4 @@ Please choose from the list the subject you want to submit books for:
 <form action="LogOut" method="post"> 
 <Button type="submit">Log Out</Button>
 </form>
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
 
