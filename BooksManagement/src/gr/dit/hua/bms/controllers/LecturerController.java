@@ -1,5 +1,6 @@
 package gr.dit.hua.bms.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,7 @@ public class LecturerController {
 				List<Book> books=session
 			            .createQuery("select b from Book b")
 			            .list();
-				
+				List<String> coursebooks = new ArrayList<>();
 				int id1 = dbcourse.getBook1();
 				int id2 = dbcourse.getBook2();
 				Book book1=new Book();
@@ -59,11 +60,13 @@ public class LecturerController {
 						book2=testbook;
 						foundBook2 =true;
 					}
-					if ((foundBook1)&&(foundBook2)) {
-						break;
+					
+					if(testbook.getCourseId() == dbcourse.getCourseId()) {
+						coursebooks.add(testbook.getTitle());
 					}
+					
 				}
-
+				
 				/*List<Book> book1 =session
 			            .createQuery("select b from Book b")
 			            .list();
@@ -78,7 +81,7 @@ public class LecturerController {
 				
 				model.addAttribute("book1", book1.getTitle());
 				model.addAttribute("book2", book2.getTitle());
-				
+				model.addAttribute("listbooks", coursebooks);
 				session.getTransaction().commit();
 				return "bookOptions";
 			} else {
@@ -98,8 +101,9 @@ public class LecturerController {
 	public String pickBooks(HttpServletRequest request, Model model) {
 		String book1 = request.getParameter("choice1");
 		String book2 = request.getParameter("choice2");
+		int id1 = 0, id2 = 0;
 		
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Course.class)
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Course.class).addAnnotatedClass(Book.class)
 				.buildSessionFactory();
 		Session session = factory.getCurrentSession();
 		try {
@@ -107,14 +111,29 @@ public class LecturerController {
 			session.beginTransaction();
 
 			// get the student object
-			
-			
-			int title1 = session.get(Book.class, book1).getId();
-			int title2 = session.get(Book.class, book2).getId();
-			if (title1 != 0 && title1 != 0) {
-				Course dbcourse = session.get(Course.class, subject);
-				dbcourse.setBook1(title1);
-				dbcourse.setBook2(title1);
+			List courses = session
+		            .createQuery("select c from Course c where c.title = :title")
+		            .setParameter("title", subject)
+		            .list();
+
+			Course dbcourse = (Course) courses.get(0);
+			@SuppressWarnings("unchecked")
+			List<Book> books=session
+			           .createQuery("select b from Book b")
+			           .list();
+			for (int i=0;(i<books.size());i++) {
+				Book testbook=books.get(i);
+				if (testbook.getTitle().toString()==book1) {
+					id1=testbook.getId();
+				} else if (testbook.getTitle().toString()==book2){
+					id2=testbook.getId();
+				}
+			}
+				
+			if (id1 != 0 && id2 != 0) {
+				
+				dbcourse.setBook1(id1);
+				dbcourse.setBook2(id2);
 				session.update(dbcourse);
 				
 				// commit transaction
