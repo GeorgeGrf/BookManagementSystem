@@ -8,19 +8,28 @@ import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import gr.dit.hua.entities.Book;
 import gr.dit.hua.entities.Course;
+import gr.dit.hua.entities.State;
 import gr.dit.hua.entities.User;
 
 @Controller
 public class LecturerController {
 
 	String subject;
+	@RequestMapping("/LogOut")
+		public String pickSubject(HttpServletRequest request) {
+			return "/";
+		}
 	
+		
+		
+		
 	@RequestMapping("/pickSubject")
 	public String pickSubject(HttpServletRequest request, Model model) {
 		subject = request.getParameter("subject");
@@ -49,16 +58,13 @@ public class LecturerController {
 				int id2 = dbcourse.getBook2();
 				Book book1=new Book();
 				Book book2=new Book();
-				boolean foundBook1=false;
-				boolean foundBook2=false;
 				for (int i=0;(i<books.size());i++) {
 					Book testbook=books.get(i);
 					if (testbook.getId()==id1) {
 						book1=testbook;
-						foundBook1 =true;
 					} else if (testbook.getId()==id2){
 						book2=testbook;
-						foundBook2 =true;
+
 					}
 					
 					if(testbook.getCourseId() == dbcourse.getCourseId()) {
@@ -66,24 +72,18 @@ public class LecturerController {
 					}
 					
 				}
-				
-				/*List<Book> book1 =session
-			            .createQuery("select b from Book b")
-			            .list();
-				Book dbbook1 = (Book) book1.get(0);
-				
-				List<Book> book2 = session
-			            .createQuery("select b from Book b where bookId = :b2")
-			            .setParameter("b2", id2)
-			            .list();
-				Book dbbook2 = (Book) book2.get(0);
-*/
+				if ((book1.getId()==5)||(book2.getId()==5)){
+					model.addAttribute("listbooks", books);
+					session.getTransaction().commit();
+					return "bookOptions";
+					
+				}else {
+
 				
 				model.addAttribute("book1", book1.getTitle());
 				model.addAttribute("book2", book2.getTitle());
-				model.addAttribute("listbooks", coursebooks);
 				session.getTransaction().commit();
-				return "bookOptions";
+				return "booksAssigned";}
 			} else {
 				System.out.println("Course is empty");
 				return "lecturer";
@@ -101,9 +101,15 @@ public class LecturerController {
 	public String pickBooks(HttpServletRequest request, Model model) {
 		String book1 = request.getParameter("choice1");
 		String book2 = request.getParameter("choice2");
-		int id1 = 0, id2 = 0;
-		
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Course.class).addAnnotatedClass(Book.class)
+		if (book1.compareTo(book2)==0) {
+			return "lecturerError";
+		} else if (book1.compareTo("Not Selected")==0) {
+			return "lecturerError";
+		} else if (book2.compareTo("Not Selected")==0){
+			return "lecturerError";
+		}
+		int id1 = 5,id2=5;
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(State.class).addAnnotatedClass(Course.class).addAnnotatedClass(Book.class)
 				.buildSessionFactory();
 		Session session = factory.getCurrentSession();
 		try {
@@ -123,30 +129,30 @@ public class LecturerController {
 			           .list();
 			for (int i=0;(i<books.size());i++) {
 				Book testbook=books.get(i);
-				if (testbook.getTitle().toString()==book1) {
+				if (testbook.getTitle().toString().compareTo(book1)==0) {
 					id1=testbook.getId();
-				} else if (testbook.getTitle().toString()==book2){
+				} else if (testbook.getTitle().toString().compareTo(book2)==0){
 					id2=testbook.getId();
 				}
 			}
 				
-			if (id1 != 0 && id2 != 0) {
+			
 				
 				dbcourse.setBook1(id1);
 				dbcourse.setBook2(id2);
-				session.update(dbcourse);
+				session.saveOrUpdate(dbcourse);
+				Query query=session.createQuery("UPDATE State SET status='Books are available'  WHERE courseId =:courseId").setParameter("courseId",dbcourse.getCourseId() );
+			    query.executeUpdate();
+				
 				
 				// commit transaction
 				session.getTransaction().commit();
-				return "lecturer";
-			} else {
-				System.out.println("Titles 1 or 2 are 0");
-			}
+				return "lecturerSuccess";
+			
 			
 		} finally {
 			factory.close();
 		}
-		return " ";
 		
 	}
 	
